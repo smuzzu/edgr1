@@ -25,8 +25,7 @@ public class MailSenderUtil {
 
     private static final String username="beatrizdassieu@gmail.com";
     private static final String password="svbskofrfnfoslef";
-    //private static final String destinationAddresses="sebastian.muzzupappa@markmonitor.com,sebamuzzu@gmail.com";
-    private static final String destinationAddresses="sebamuzzu@gmail.com,edgar@qubisuite.com";
+    private static final String destinationAddresses="sebamuzzu@gmail.com,edgar@qubitsuite.com";
 
     public static boolean sendMail(String subject, String text,String destinationAddress, String []attachmets){
         if (destinationAddress==null || destinationAddress.isEmpty()){
