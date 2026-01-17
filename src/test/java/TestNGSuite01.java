@@ -172,6 +172,10 @@ public class TestNGSuite01 {
 
     @AfterMethod
     public void takeScreenShotOnFailure(ITestResult testResult)  {
+        if (webDriver==null){
+            System.out.println("Exception while taking screenshot.  webdriver is null ");
+            return;
+        }
         if (testResult.getStatus() != ITestResult.SUCCESS) {
             try {
                 File scrFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
@@ -189,9 +193,7 @@ public class TestNGSuite01 {
             } catch (Exception e) {
                 System.out.println("Exception while taking screenshot " + e.getMessage());
             }
-            if (webDriver!=null) {
-                webDriver.quit();
-            }
+            webDriver.quit();
         }
     }
 
