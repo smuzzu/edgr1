@@ -189,7 +189,9 @@ public class TestNGSuite01 {
             } catch (Exception e) {
                 System.out.println("Exception while taking screenshot " + e.getMessage());
             }
-            webDriver.quit();
+            if (webDriver!=null) {
+                webDriver.quit();
+            }
         }
     }
 
