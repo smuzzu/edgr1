@@ -118,7 +118,7 @@ public class TestNGSuite01 {
             System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
             System.setProperty("webdriver.chrome.verboseLogging", "true");
             System.setProperty("webdriver.chrome.verboseLogging", "true");
-            System.setProperty("webdriver.chrome.logfile", "failure_chromedriver_sysprop.log");
+            System.setProperty("webdriver.chrome.logfile", "target/surefire-reports/failure_chromedriver_sysprop.log");
         }
 
         ChromeOptions options = new ChromeOptions();
