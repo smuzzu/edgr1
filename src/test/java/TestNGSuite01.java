@@ -1,7 +1,5 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -12,11 +10,12 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Locale;
 
 
 public class TestNGSuite01 {
 
-    private static final boolean headless=true;
+    private static final boolean headless=false;
     private static final boolean wait=false;
 
 
@@ -27,12 +26,12 @@ public class TestNGSuite01 {
         WebElement buttonElement = FluentWaitUtil.getWebElementFluentWait(driver,By.xpath("//button[@type='submit']"),30L);
         buttonElement.click();
 
-        checkRequiredElement(driver,"Nombre");
-        checkRequiredElement(driver,"Apellido");
-        checkRequiredElement(driver,"Email");
-        checkRequiredElement(driver,"Teléfono");
-        checkRequiredElement(driver,"Contraseña");
-        checkRequiredElement(driver,"Repetir Contraseña");
+        checkRequiredElement(driver,"Nombre",null);
+        checkRequiredElement(driver,"Apellido",null);
+        checkRequiredElement(driver,"Email",null);
+        checkRequiredElement(driver,"Teléfono","Por favor ingresa un teléfono válido");
+        checkRequiredElement(driver,"Contraseña",null);
+        checkRequiredElement(driver,"Repetir Contraseña",null);
 
         if (wait) {
             waitSeconds(30L);
@@ -41,7 +40,42 @@ public class TestNGSuite01 {
     }
 
     @Test
-    public void Test002_Qubitsuite_signup_wrong_email() {
+    public void Test002_Qubitsuite_signup_default_country_code() {
+        WebDriver driver = openSignupPage();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String browserLanguage = (String) js.executeScript("return navigator.language || navigator.userLanguage;");
+
+        Assert.assertNotNull(browserLanguage,"no pudo detectar el lenguaje");
+
+        Locale locale = Locale.forLanguageTag(browserLanguage);
+        String country = locale.getCountry();
+        String displayCountry = locale.getDisplayCountry();
+
+        String countryXpath="//div[contains(text(),'Teléfono')]/..//div[contains(text(), '"+displayCountry+"')]";
+
+        try {
+            driver.findElement(By.xpath(countryXpath));
+        }catch (Exception e){
+            Assert.fail("no pudo localizar el pais "+displayCountry);
+        }
+
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+        String phonePrefix = "+"+phoneUtil.getCountryCodeForRegion(country);
+
+        String phonePrefixXpath="//div[contains(text(),'Teléfono')]/..//div[contains(text(), '"+phonePrefix+"')]";
+
+        try {
+            driver.findElement(By.xpath(phonePrefixXpath));
+        }catch (Exception e){
+            Assert.fail("no pudo localizar el prefijo telefonico "+phonePrefix);
+        }
+
+
+    }
+
+    @Test
+    public void Test003_Qubitsuite_signup_wrong_password() {
         WebDriver driver = openSignupPage();
 
         WebElement firstName = FluentWaitUtil.getWebElementFluentWait(driver,By.xpath("//input[@name='firstName']"),30L);
@@ -50,9 +84,6 @@ public class TestNGSuite01 {
         lastName.sendKeys("Maradona");
         WebElement email = FluentWaitUtil.getWebElementFluentWait(driver,By.xpath("//input[@name='email']"),30L);
         email.sendKeys("diego@gmail.com");
-        //WebElement countryCode = FluentWaitUtil.getWebElementFluentWait(driver,By.xpath("//button/*[@data-testid='ArrowDropDownIcon']/.."),30L);
-        WebElement countryCode = FluentWaitUtil.getWebElementFluentWait(driver,By.xpath("//div[contains(text(),'Teléfono')]/..//input"),30L);
-        countryCode.sendKeys("Arg");
 
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.PAGE_DOWN).perform();
@@ -133,10 +164,13 @@ public class TestNGSuite01 {
         return driver;
     }
 
-    private static void checkRequiredElement(WebDriver driver, String label) {
+    private static void checkRequiredElement(WebDriver driver, String label, String errorMessage) {
         WebElement errMsgElement = FluentWaitUtil.getWebElementFluentWait(driver,By.xpath("//*[contains(text(),'"+label+"')]/..//p"),30L);
         String text = errMsgElement.getText();
-        Assert.assertEquals(text,"Requerido",label+" not found");
+        if (errorMessage==null || errorMessage.isEmpty()){
+            errorMessage="Requerido";
+        }
+        Assert.assertEquals(text,errorMessage,label+" not found");
     }
 
 
