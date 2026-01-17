@@ -18,7 +18,7 @@ jobs:
             sudo apt upgrade firefox
             wget -N https://storage.googleapis.com/chrome-for-testing-public/143.0.7499.192/linux64/chrome-linux64.zip -O /tmp/chrome-linux64.zip
             sudo unzip -oj /tmp/chrome-linux64.zip -d /usr/local/bin
-            sudo chmod +x /usr/local/bin/google-chrome
+            sudo chmod +x /usr/local/bin/chrome
             wget -N https://storage.googleapis.com/chrome-for-testing-public/143.0.7499.192/linux64/chrome-linux64.zip -O /tmp/chromedriver-linux64.zip
             sudo unzip -oj /tmp/chromedriver-linux64.zip -d /usr/local/bin
             sudo chmod +x /usr/local/bin/chromedriver
