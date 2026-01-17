@@ -16,14 +16,22 @@ jobs:
             sudo apt install maven -y
             sudo apt-get install firefox-geckodriver
             sudo apt upgrade firefox
+            sudo apt-get install -y google-chrome-stable
+            CHROMEDRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE")
+            wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip -O /tmp/chromedriver-linux64.zip
+            sudo unzip -oj /tmp/chromedriver-linux64.zip -d /usr/local/bin
+            sudo chmod +x /usr/local/bin/chromedriver
             sudo apt autoremove
             echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX show versions"
             lsb_release -a
             java -version
             mvn --version
             firefox --version
+            google-chrome --version
             geckodriver --version
+            chromedriver --version
             which geckodriver
+            which chromedriver
 
       # Run tests using Maven's test or integration-test goal
       - run:
