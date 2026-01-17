@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install OpenJDK 17, Maven, Geckodriver and Upgrade Firefox
+          name: Install OpenJDK 17, Maven, Firefox, Geckodriver, Chrome and Chromedriver
           command: |
             sudo apt-get update
             sudo apt-get install -y openjdk-17-jdk

@@ -13,9 +13,11 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import java.io.UnsupportedEncodingException;
@@ -115,12 +117,35 @@ public class MailSenderUtil {
         String body="";
 
         Path filePath = Paths.get("target/surefire-reports/emailable-report.html");
+
+        File directory = new File("target/surefire-reports"); // Replace with your directory path
+        File[] files = directory.listFiles();
+        ArrayList<String> attachmentList = new ArrayList<String>();
+
+        if (files != null) { // Check if the path denotes a directory and is not null
+            System.out.println("Files in the directory:");
+            for (File file : files) {
+                if (file.isFile()) {
+                    String fileName=file.getAbsolutePath();
+                    if (fileName.contains("failure")) {
+                        attachmentList.add(fileName);
+                        System.out.println(fileName);
+                    }
+                }
+            }
+        } else {
+            System.out.println("Directory is null or does not exist.");
+        }
+
+
         try {
             body= Files.readString(filePath);
         }catch (Exception e){
             e.printStackTrace();
         }
-        sendMail(subject,body,null);
+        String[] attachmentsArray = attachmentList.toArray(new String[0]);
+
+        sendMail(subject,body,null, attachmentsArray);
     }
 
 }
