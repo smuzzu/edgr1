@@ -33,7 +33,7 @@ import java.util.List;
 
 public class TestNGSuite01 {
 
-    private static final boolean headless=false;
+    private static final boolean headless=true;
     private static final boolean wait=false;
 
     private static WebDriver webDriver;
