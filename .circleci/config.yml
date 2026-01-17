@@ -16,10 +16,9 @@ jobs:
             sudo apt install maven -y
             sudo apt-get install firefox-geckodriver
             sudo apt upgrade firefox
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo apt install -f ./google-chrome-stable_current_amd64.deb -y
-            CHROMEDRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE")
-            wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip -O /tmp/chromedriver-linux64.zip
+            wget wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_143.0.7499.192_amd64.deb
+            sudo apt install -f ./google-chrome-stable_143.0.7499.192_amd64.deb -y
+            wget -N https://storage.googleapis.com/chrome-for-testing-public/143.0.7499.192/linux64/chrome-linux64.zip -O /tmp/chromedriver-linux64.zip
             sudo unzip -oj /tmp/chromedriver-linux64.zip -d /usr/local/bin
             sudo chmod +x /usr/local/bin/chromedriver
             sudo apt autoremove
