@@ -28,7 +28,7 @@ jobs:
             java -version
             mvn --version
             firefox --version
-            google-chrome --version
+            chrome --version
             geckodriver --version
             chromedriver --version
             which geckodriver
