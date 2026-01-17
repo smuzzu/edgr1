@@ -117,6 +117,8 @@ public class TestNGSuite01 {
             System.out.println("This is a Linux system. Setting Chromedriver location");
             System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
             System.setProperty("webdriver.chrome.verboseLogging", "true");
+            System.setProperty("webdriver.chrome.verboseLogging", "true");
+            System.setProperty("webdriver.chrome.logfile", "failure_chromedriver_sysprop.log");
         }
 
         ChromeOptions options = new ChromeOptions();
