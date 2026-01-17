@@ -112,12 +112,12 @@ public class TestNGSuite01 {
         String url = "https://app.qubitsuite.com/signup";
         String osName = System.getProperty("os.name");
 
-
+/*
         if (osName.equals("Linux")) {
             System.out.println("This is a Linux system. Setting Chromedriver location");
             System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
-        }
+        }*/
 
         ChromeOptions options = new ChromeOptions();
         if (headless) {
