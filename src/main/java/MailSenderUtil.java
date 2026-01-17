@@ -127,10 +127,10 @@ public class MailSenderUtil {
             for (File file : files) {
                 if (file.isFile()) {
                     String fileName=file.getAbsolutePath();
-                    //if (fileName.contains("failure")) {
+                    if (fileName.contains("failure")) {
                         attachmentList.add(fileName);
                         System.out.println(fileName);
-                    //}
+                    }
                 }
             }
         } else {
