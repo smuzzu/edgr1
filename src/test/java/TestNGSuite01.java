@@ -7,6 +7,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import org.openqa.selenium.interactions.Actions;
@@ -116,10 +117,13 @@ public class TestNGSuite01 {
         if (osName.equals("Linux")) {
             System.out.println("This is a Linux system. Setting Chromedriver location");
             System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
-            System.setProperty("webdriver.chrome.verboseLogging", "true");
-            System.setProperty("webdriver.chrome.verboseLogging", "true");
-            System.setProperty("webdriver.chrome.logfile", "target/surefire-reports/failure_chromedriver_sysprop.log");
         }
+
+
+        ChromeDriverService service = new ChromeDriverService.Builder()
+                .withLogFile(new File("target/surefire-reports/failure-chromedriver.log")) // Specify log file path
+                .withVerbose(true)                             // Enable verbose logging
+                .build();
 
         ChromeOptions options = new ChromeOptions();
         if (headless) {
@@ -127,7 +131,7 @@ public class TestNGSuite01 {
         }
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--start-maximized");
-        webDriver = new ChromeDriver(options);
+        webDriver = new ChromeDriver(service,options);
         webDriver.manage().window().maximize();
         webDriver.manage().window().fullscreen();
 
