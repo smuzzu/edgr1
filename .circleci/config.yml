@@ -5,7 +5,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: cimg/openjdk:11.0.21-browsers # Includes Java and preinstalled browsers
+      - image: cimg/openjdk:17.0-browsers # Includes Java and preinstalled browsers
     steps:
       - checkout
       - browser-tools/install-browser-tools # Installs ChromeDriver and GeckoDriver
@@ -16,3 +16,9 @@ jobs:
             ./run.sh
       - store_test_results:
           path: target/surefire-reports # To visualize in the CircleCI dashboard
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
