@@ -15,10 +15,10 @@ jobs:
             java -version
             google-chrome --version
             chromedriver --version
+            which chromedriver
             firefox --version
             geckodriver --version
-            whois chromedriver
-            whois geckodriver
+            which geckodriver
       - run:
           name: Run Selenium TestNG Tests and send email
           command: |
