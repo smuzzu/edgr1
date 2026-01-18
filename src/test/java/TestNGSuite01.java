@@ -131,6 +131,8 @@ public class TestNGSuite01 {
         }
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--start-maximized");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         webDriver = new ChromeDriver(service,options);
         webDriver.manage().window().maximize();
         webDriver.manage().window().fullscreen();
