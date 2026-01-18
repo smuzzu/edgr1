@@ -24,11 +24,8 @@ jobs:
           command: |
             chmod +x run.sh
             ./run.sh
-      - store_test_results:
-          path: target/surefire-reports # To visualize in the CircleCI dashboard
-          when: always
-      - store_artifacts:
-          path: target/surefire-reports
+      - store_test_results: # To visualize in the CircleCI dashboard
+          path: target/surefire-reports/junitreports  #WA for cicleci
           when: always
 
 workflows:
