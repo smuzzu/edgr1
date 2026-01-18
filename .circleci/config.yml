@@ -25,7 +25,7 @@ jobs:
             chmod +x run.sh
             ./run.sh
       - store_test_results: # To visualize in the CircleCI dashboard
-          path: target/surefire-reports/junitreports  #WA for cicleci
+          path: target/surefire-reports/junitreports  #WA for cicleci not sure this works
           when: always
 
 workflows:

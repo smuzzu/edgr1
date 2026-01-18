@@ -53,8 +53,6 @@ public class TestNGSuite01 {
         checkRequiredElement(webDriver,"Contraseña",null);
         checkRequiredElement(webDriver,"Repetir Contraseña",null);
 
-        Assert.fail("error prueba");
-
         if (wait) {
             waitSeconds(30L);
         }
