@@ -1,47 +1,24 @@
-version: '2.1'
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@2.3.2
 
 jobs:
-  build:
+  test:
     docker:
-      - image: cimg/base:2022.05
+      - image: cimg/openjdk:11.0.21-browsers # Includes Java and preinstalled browsers
     steps:
       - checkout
-      - run:
-          name: Install OpenJDK 17, Maven, Firefox, Geckodriver, Chrome and Chromedriver
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y openjdk-17-jdk
-            sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
-            sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
-            sudo apt install maven -y
-            sudo apt-get install firefox-geckodriver
-            sudo apt upgrade firefox
-            
-            sudo apt install libgbm1
-            wget -N https://storage.googleapis.com/chrome-for-testing-public/142.0.7444.175/linux64/chrome-linux64.zip -O /tmp/chrome-linux64.zip
-            sudo unzip -oj /tmp/chrome-linux64.zip -d /usr/local/bin
-            sudo chmod +x /usr/local/bin/chrome
-            
-            sudo apt autoremove
-            echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX show versions"
-            lsb_release -a
-            java -version
-            mvn --version
-            firefox --version
-            chrome --version
-            geckodriver --version
-            which geckodriver
-
-
-      # Run tests using Maven's test or integration-test goal
+      - browser-tools/install-browser-tools # Installs ChromeDriver and GeckoDriver
       - run:
           name: Run Selenium TestNG Tests and send email
           command: |
             chmod +x run.sh
             ./run.sh
+      - store_test_results:
+          path: target/surefire-reports # To visualize in the CircleCI dashboard
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - test
