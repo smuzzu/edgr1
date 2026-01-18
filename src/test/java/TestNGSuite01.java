@@ -7,7 +7,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import org.openqa.selenium.interactions.Actions;
@@ -114,17 +113,6 @@ public class TestNGSuite01 {
         String osName = System.getProperty("os.name");
 
 
-        if (osName.equals("Linux")) {
-            System.out.println("This is a Linux system. Setting Chromedriver location");
-            System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
-        }
-
-
-        ChromeDriverService service = new ChromeDriverService.Builder()
-                .withLogFile(new File("target/surefire-reports/chromedriver.log")) // Specify log file path
-                .withVerbose(true)                             // Enable verbose logging
-                .build();
-
         ChromeOptions options = new ChromeOptions();
         if (headless) {
             options.addArguments("--headless");
@@ -133,7 +121,7 @@ public class TestNGSuite01 {
         options.addArguments("--start-maximized");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        webDriver = new ChromeDriver(service,options);
+        webDriver = new ChromeDriver(options);
         webDriver.manage().window().maximize();
         webDriver.manage().window().fullscreen();
 

@@ -22,10 +22,6 @@ jobs:
             sudo unzip -oj /tmp/chrome-linux64.zip -d /usr/local/bin
             sudo chmod +x /usr/local/bin/chrome
             
-            wget -N https://storage.googleapis.com/chrome-for-testing-public/142.0.7444.175/linux64/chromedriver-linux64.zip -O /tmp/chromedriver-linux64.zip
-            sudo unzip -oj /tmp/chromedriver-linux64.zip -d /usr/local/bin
-            sudo chmod +x /usr/local/bin/chromedriver
-            
             sudo apt autoremove
             echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX show versions"
             lsb_release -a
