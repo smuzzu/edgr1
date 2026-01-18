@@ -30,9 +30,7 @@ jobs:
             firefox --version
             chrome --version
             geckodriver --version
-            chromedriver --version
             which geckodriver
-            which chromedriver
             
             sudo netstat -tulnp | grep :4444
             sudo netstat -tulnp | grep :9515
