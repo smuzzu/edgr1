@@ -1,4 +1,3 @@
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -53,6 +52,8 @@ public class TestNGSuite01 {
         checkRequiredElement(webDriver,"Teléfono","Por favor ingresa un teléfono válido");
         checkRequiredElement(webDriver,"Contraseña",null);
         checkRequiredElement(webDriver,"Repetir Contraseña",null);
+
+        Assert.fail("error prueba");
 
         if (wait) {
             waitSeconds(30L);
@@ -110,8 +111,6 @@ public class TestNGSuite01 {
 
     private static void openSignupPage() {
         String url = "https://app.qubitsuite.com/signup";
-        String osName = System.getProperty("os.name");
-
 
         ChromeOptions options = new ChromeOptions();
         if (headless) {
@@ -119,8 +118,6 @@ public class TestNGSuite01 {
         }
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--start-maximized");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
         webDriver = new ChromeDriver(options);
         webDriver.manage().window().maximize();
         webDriver.manage().window().fullscreen();
