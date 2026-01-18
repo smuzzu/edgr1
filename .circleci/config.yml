@@ -31,9 +31,7 @@ jobs:
             chrome --version
             geckodriver --version
             which geckodriver
-            
-            sudo netstat -tulnp | grep :4444
-            sudo netstat -tulnp | grep :9515
+
 
       # Run tests using Maven's test or integration-test goal
       - run:
