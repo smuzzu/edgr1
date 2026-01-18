@@ -10,14 +10,14 @@ jobs:
       - checkout
       - browser-tools/install_browser_tools  # Installs ChromeDriver and GeckoDriver
       - run:
-          name: Verificar versiones instaladas
+          name: Verify installed versions
           command: |
             java -version
             google-chrome --version
             chromedriver --version
-            which chromedriver
             firefox --version
             geckodriver --version
+            which chromedriver
             which geckodriver
       - run:
           name: Run Selenium TestNG Tests and send email
@@ -26,6 +26,10 @@ jobs:
             ./run.sh
       - store_test_results:
           path: target/surefire-reports # To visualize in the CircleCI dashboard
+          when: always
+      - store_artifacts:
+          path: target/surefire-reports
+          when: always
 
 workflows:
   version: 2
