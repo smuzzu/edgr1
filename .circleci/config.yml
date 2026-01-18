@@ -8,7 +8,7 @@ jobs:
       - image: cimg/openjdk:17.0-browsers # Includes Java and preinstalled browsers
     steps:
       - checkout
-      - browser-tools/install-browser-tools # Installs ChromeDriver and GeckoDriver
+      - browser-tools/install_browser_tools  # Installs ChromeDriver and GeckoDriver
       - run:
           name: Run Selenium TestNG Tests and send email
           command: |
