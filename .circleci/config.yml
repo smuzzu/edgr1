@@ -38,9 +38,7 @@ jobs:
             which geckodriver
             which chromedriver
             
-            sudo ss -tulnp | grep :4444
             sudo netstat -tulnp | grep :4444
-            sudo ss -tulnp | grep :9515
             sudo netstat -tulnp | grep :9515
 
       # Run tests using Maven's test or integration-test goal
