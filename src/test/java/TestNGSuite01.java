@@ -121,7 +121,7 @@ public class TestNGSuite01 {
 
 
         ChromeDriverService service = new ChromeDriverService.Builder()
-                .withLogFile(new File("target/surefire-reports/failure-chromedriver.log")) // Specify log file path
+                .withLogFile(new File("target/surefire-reports/chromedriver.log")) // Specify log file path
                 .withVerbose(true)                             // Enable verbose logging
                 .build();
 

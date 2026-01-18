@@ -137,6 +137,8 @@ public class MailSenderUtil {
             System.out.println("Directory is null or does not exist.");
         }
 
+        attachmentList.add(new File("target/surefire-reports/chromedriver.log").getAbsolutePath());
+
 
         try {
             body= Files.readString(filePath);
